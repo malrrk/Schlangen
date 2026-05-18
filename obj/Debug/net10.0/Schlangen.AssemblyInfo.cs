@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Schlangen")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5364b64683797ea5dcee9b870a89a8c08fa49e02")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c196c32bf1870fa1d260205b73d3b616bdfd9202")]
 [assembly: System.Reflection.AssemblyProductAttribute("Schlangen")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Schlangen")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

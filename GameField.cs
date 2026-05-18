@@ -56,7 +56,7 @@ namespace SCHLANGEN
             {
                 gameOver = takeTurn(Player1, Player2);
 
-                if (!gameOver)
+                if(!gameOver)
                 {
                     gameOver = takeTurn(Player1, Player2);
                 }
@@ -74,18 +74,31 @@ namespace SCHLANGEN
             }
             else if(diceResult == 6)
             {
+                rolledSix(player);
                 return false;
             }
             else
             {
-                FieldNode pos = movePlayer(diceResult, player);
+                FieldNode? pos = movePlayer(diceResult, player);
 
                 if(pos == other.Position)
                 {
-                    
+                    pos = movePlayer(-1, player);
                 }
-
+                if (pos.Snake)
+                {
+                    pos = movePlayer(-3, player);    
+                }
+                else if (pos.Ladder) //else if um doppeltzug zu verhindern
+                {
+                    pos = movePlayer(3, player);
+                }
+                if(pos == end)
+                {
+                    return true;
+                }
             }
+            return false;
         }
 
         public int rollDice()
@@ -106,7 +119,13 @@ namespace SCHLANGEN
 
         public void rolledSix(Player player)
         {
+            FieldNode current = player.Position;
             
+            for(int i = 0; i <= 5; i++)
+            {
+                FieldNode newNode = new FieldNode(false, false, current.Prev, current);
+                current = newNode;
+            }
         }
 
         public FieldNode? movePlayer(int fields, Player player)
