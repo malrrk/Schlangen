@@ -9,27 +9,32 @@ namespace SCHLANGEN
         {          
             Console.WriteLine("1. Spieler:");
 
-            string? Player1 = Console.ReadLine();
-            while(Player1 == null)
+            string? Player1_Name = Console.ReadLine();
+            while(Player1_Name == null)
             {
                 Console.WriteLine("Bitte richtigen Namen angeben");
-                Player1 = Console.ReadLine();
+                Player1_Name = Console.ReadLine();
             }
 
             Console.WriteLine("1. Spieler:");
 
-            string? Player2 = Console.ReadLine();
-            while(Player2 == null)
+            string? Player2_Name = Console.ReadLine();
+            while(Player2_Name == null)
             {
                 Console.WriteLine("Bitte richtigen Namen angeben");
-                Player2 = Console.ReadLine();
+                Player2_Name = Console.ReadLine();
             }
 
             int FieldX = int.Parse(Console.ReadLine());
             int FieldY = int.Parse(Console.ReadLine());
             int FieldLength = FieldX*FieldY;
 
-            GameField game = new GameField(FieldLength, Player1, Player2);
+            GameField game = new GameField(FieldLength, Player1_Name, Player2_Name);
+
+            //MainGameLoop
+            game.Play();
+            
+
 
         }
     }

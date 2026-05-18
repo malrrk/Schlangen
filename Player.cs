@@ -8,10 +8,11 @@ namespace SCHLANGEN
             public int Throws;
             public FieldNode Position;
 
-            public Player(string Name)
+            public Player(string Name, FieldNode start)
             {
                 this.Name = Name;
                 Throws = 0;
+                Position = start;
             }
         }
     }

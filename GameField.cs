@@ -16,8 +16,6 @@ namespace SCHLANGEN
         public GameField(int FieldLength, string Player1, string Player2)
         {
             this.FieldLength = FieldLength;
-            this.Player1 = new Player(Player1);
-            this.Player2 = new Player(Player2);
 
             start = new FieldNode(false, false, null, null);
             FieldNode current = start;
@@ -26,25 +24,110 @@ namespace SCHLANGEN
             {
                 if(random.Next(1, probLadder) == 1)
                 {
-                    FieldNode newNode = new FieldNode(false, true, current, null);
+                    FieldNode newNode = new FieldNode(false, true, null, current);
                     start.Next = newNode;
                     current = newNode;
                 }
                 else if(random.Next(1, probSnake) == 1)
                 {
-                    FieldNode newNode = new FieldNode(true, false, current, null);
+                    FieldNode newNode = new FieldNode(true, false, null, current);
                     start.Next = newNode;
                     current = newNode;
                 }
                 else
                 {
-                    FieldNode newNode = new FieldNode(false, true, current, null);
+                    FieldNode newNode = new FieldNode(false, true, null, current);
                     start.Next = newNode;
                     current = newNode;
                 }
             }
 
+            this.Player1 = new Player(Player1, start);
+            this.Player2 = new Player(Player2, start);
+
             end = current;
         }
+
+        public void Play()
+        {
+            bool gameOver = false;
+
+            while (!gameOver)
+            {
+                gameOver = takeTurn(Player1, Player2);
+
+                if (!gameOver)
+                {
+                    gameOver = takeTurn(Player1, Player2);
+                }
+            }
+        }
+
+        public bool takeTurn(Player player, Player other)
+        {
+            int diceResult = rollDice();
+
+            if(diceResult == 1)
+            {
+                rolledOne();
+                return false;
+            }
+            else if(diceResult == 6)
+            {
+                return false;
+            }
+            else
+            {
+                FieldNode pos = movePlayer(diceResult, player);
+
+                if(pos == other.Position)
+                {
+                    
+                }
+
+            }
+        }
+
+        public int rollDice()
+        {
+            return random.Next(1, 7);
+        }
+
+        public void rolledOne()
+        {
+            FieldNode current = end;
+            for(int i = 0; i <= 5; i++)
+            {
+                FieldNode newNode = new FieldNode(false, false, current, null);
+                end.Next = newNode;
+                current = newNode;
+            }
+        }
+
+        public void rolledSix(Player player)
+        {
+            
+        }
+
+        public FieldNode? movePlayer(int fields, Player player)
+        {
+            if(fields > 0){
+                for(int i = 0; i <= fields; i++)
+                {
+                    player.Position = player.Position.Next;
+                }
+                return player.Position;
+            }
+            else
+            {
+                for(int i = 0; i <= -fields; i++)
+                {
+                    player.Position = player.Position.Prev;
+                }
+                return player.Position;
+            }
+
+        }
+
     }
 }

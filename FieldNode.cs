@@ -9,7 +9,7 @@ namespace SCHLANGEN
             public FieldNode? Next;
             public FieldNode? Prev;
 
-            public FieldNode(bool Snake, bool Ladder, FieldNode? Next, FieldNode? Prev)
+            public FieldNode(bool Snake, bool Ladder, FieldNode? Prev, FieldNode? Next)
             {
                 this.Snake = Snake;
                 this.Ladder = Ladder;
